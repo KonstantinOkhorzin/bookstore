@@ -19,4 +19,6 @@ router.get('/current', authenticate, authControllers.getCurrent);
 
 router.post('/logout', authenticate, authControllers.logout);
 
+router.patch('/avatars', authenticate, uploadFile.single('avatar'), authControllers.updateAvatar);
+
 export default router;

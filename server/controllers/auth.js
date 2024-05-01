@@ -92,9 +92,22 @@ const logout = async (req, res) => {
   res.status(204).send();
 };
 
+const updateAvatar = async (req, res) => {
+  const { _id } = req.user;
+
+  const avatarURL = await saveFileToCloudinary({ path: req.file.path, ...avatarConfig });
+
+  await User.findByIdAndUpdate(_id, { avatarURL });
+
+  res.json({
+    avatarURL,
+  });
+};
+
 export default {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
+  updateAvatar: ctrlWrapper(updateAvatar),
 };
