@@ -72,7 +72,29 @@ const login = async (req, res) => {
   });
 };
 
+const getCurrent = async (req, res) => {
+  const { email } = req.user;
+
+  const user = await User.findOne({ email });
+
+  res.json({
+    email: user.email,
+    name: user.name,
+    avatarURL: user.avatarURL,
+    role: user.role,
+  });
+};
+
+const logout = async (req, res) => {
+  const { _id } = req.user;
+  await User.findByIdAndUpdate(_id, { token: '' });
+
+  res.status(204).send();
+};
+
 export default {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
+  getCurrent: ctrlWrapper(getCurrent),
+  logout: ctrlWrapper(logout),
 };
