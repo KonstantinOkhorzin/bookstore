@@ -20,6 +20,7 @@ const register = async (req, res) => {
   const avatarURL = req.file?.path
     ? await saveFileToCloudinary({
         path: req.file.path,
+        id: user_id,
         ...avatarConfig,
       })
     : process.env.DEFAULT_AVATAR;
@@ -95,7 +96,7 @@ const logout = async (req, res) => {
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
 
-  const avatarURL = await saveFileToCloudinary({ path: req.file.path, ...avatarConfig });
+  const avatarURL = await saveFileToCloudinary({ path: req.file.path, ...avatarConfig, id: _id });
 
   await User.findByIdAndUpdate(_id, { avatarURL });
 

@@ -11,10 +11,16 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
 
-const saveFileToCloudinary = async ({ path, folder, width, height }) => {
+const saveFileToCloudinary = async ({ path, folder, width, height, id = '' }) => {
+  const fileName = path
+    .split('/')
+    .pop()
+    .replace(/\.[^/.]+$/, '');
+
   try {
     const result = await cloudinary.uploader.upload(path, {
       folder,
+      public_id: fileName + '_' + id,
       transformation: { width, height, crop: 'fill' },
     });
 
