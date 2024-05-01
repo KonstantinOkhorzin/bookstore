@@ -12,14 +12,18 @@ cloudinary.config({
 });
 
 const saveFileToCloudinary = async ({ path, folder, width, height }) => {
-  const result = await cloudinary.uploader.upload(path, {
-    folder,
-    transformation: { width, height, crop: 'fill' },
-  });
+  try {
+    const result = await cloudinary.uploader.upload(path, {
+      folder,
+      transformation: { width, height, crop: 'fill' },
+    });
 
-  await fs.unlink(path);
+    await fs.unlink(path);
 
-  return result.url;
+    return result.url;
+  } catch {
+    throw new Error('Failed to upload file to Cloudinary');
+  }
 };
 
 export default saveFileToCloudinary;
