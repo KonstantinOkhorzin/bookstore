@@ -40,8 +40,9 @@ export const userSchema = new Schema(
 
 const passwordSchema = Joi.string()
   .custom((value, helpers) => {
-    if (!validatePasswordStrength(value)) {
-      return helpers.message('Password is not strong enough');
+    const { isStrengthPassword, strengthMessage } = validatePasswordStrength(value);
+    if (!isStrengthPassword) {
+      return helpers.message(strengthMessage);
     }
     return value;
   })
