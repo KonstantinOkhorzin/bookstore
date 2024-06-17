@@ -1,6 +1,6 @@
 import express from 'express';
 
-import authControllers from '../controllers/auth.js';
+import authController from '../controllers/auth.js';
 import { registerSchema, loginSchema } from '../schemas/auth.js';
 import { validateBody, uploadFile, authenticate } from '../middlewares/index.js';
 
@@ -10,15 +10,15 @@ router.post(
   '/register',
   uploadFile.single('avatar'),
   validateBody(registerSchema),
-  authControllers.register
+  authController.register
 );
 
-router.post('/login', validateBody(loginSchema), authControllers.login);
+router.post('/login', validateBody(loginSchema), authController.login);
 
-router.get('/current', authenticate, authControllers.getCurrent);
+router.get('/current', authenticate, authController.getCurrent);
 
-router.post('/logout', authenticate, authControllers.logout);
+router.post('/logout', authenticate, authController.logout);
 
-router.patch('/avatars', authenticate, uploadFile.single('avatar'), authControllers.updateAvatar);
+router.patch('/avatars', authenticate, uploadFile.single('avatar'), authController.updateAvatar);
 
 export default router;
