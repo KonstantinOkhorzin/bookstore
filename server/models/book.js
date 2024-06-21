@@ -1,9 +1,9 @@
 import { model } from 'mongoose';
 
 import { handleMongooseError } from '../helpers/index.js';
-import { bookSchema } from '../schemas/auth.js';
+import { bookSchema } from '../schemas/book.js';
 
-userSchema.post('save', handleMongooseError);
+bookSchema.post('save', handleMongooseError);
 
 const Book = model('book', bookSchema);
 

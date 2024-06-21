@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { Schema } from 'mongoose';
 
-export const userSchema = new Schema(
+export const bookSchema = new Schema(
   {
     author: { type: String, required: true },
     price: { type: Number, required: true },
