@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import multer from 'multer';
 
 import authRouter from './routes/auth.js';
+import booksRouter from './routes/books.js';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/users', authRouter);
+app.use('/api/books', booksRouter);
 
 app.use((req, res) => {
   res.status(404).json({
