@@ -35,8 +35,20 @@ const createBook = async (req, res) => {
   res.status(201).json(newBook);
 };
 
+const deleteBookById = async (req, res) => {
+  const { id } = req.params;
+  const deletedBook = await Task.findByIdAndDelete(id);
+
+  if (!deletedBook) {
+    throw HttpError(404);
+  }
+
+  res.json(deletedBook);
+};
+
 export default {
   getAllBooks: ctrlWrapper(getAllBooks),
   getBookById: ctrlWrapper(getBookById),
   createBook: ctrlWrapper(createBook),
+  deleteBookById: ctrlWrapper(deleteBookById),
 };

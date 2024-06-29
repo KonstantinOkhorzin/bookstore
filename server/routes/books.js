@@ -25,4 +25,6 @@ router.post(
   booksController.createBook
 );
 
+router.delete('/:id', authenticate, isAdmin, isValidId, booksController.deleteBookById);
+
 export default router;
