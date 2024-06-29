@@ -10,7 +10,19 @@ const bookImageConfig = {
 const getAllBooks = async (req, res) => {
   const books = await Book.find();
   res.json(books);
-}
+};
+
+const getBookById = async (req, res) => {
+  const { id } = req.params;
+
+    const book = await Book.findById(id);
+
+    if (!book) {
+      throw HttpError(404);
+    }
+
+    res.json(book);
+};
 
 const createBook = async (req, res) => {
   const image = await saveFileToCloudinary({
@@ -25,5 +37,6 @@ const createBook = async (req, res) => {
 
 export default {
   getAllBooks: ctrlWrapper(getAllBooks),
+  getBookById: ctrlWrapper(getBookById),
   createBook: ctrlWrapper(createBook),
 };

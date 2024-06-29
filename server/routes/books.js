@@ -2,11 +2,19 @@ import express from 'express';
 
 import booksController from '../controllers/books.js';
 import { addBookSchema } from '../schemas/book.js';
-import { authenticate, isAdmin, uploadFile, validateBody } from '../middlewares/index.js';
+import {
+  authenticate,
+  isAdmin,
+  uploadFile,
+  validateBody,
+  isValidId,
+} from '../middlewares/index.js';
 
 const router = express.Router();
 
 router.get('/', authenticate, booksController.getAllBooks);
+
+router.get('/:id', authenticate, isValidId, booksController.getBookById);
 
 router.post(
   '/',
