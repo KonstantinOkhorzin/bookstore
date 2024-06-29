@@ -6,6 +6,8 @@ import { authenticate, isAdmin, uploadFile, validateBody } from '../middlewares/
 
 const router = express.Router();
 
+router.get('/', authenticate, booksController.getAllBooks);
+
 router.post(
   '/',
   authenticate,

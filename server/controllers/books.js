@@ -7,6 +7,11 @@ const bookImageConfig = {
   height: 328,
 };
 
+const getAllBooks = async (req, res) => {
+  const books = await Book.find();
+  res.json(books);
+}
+
 const createBook = async (req, res) => {
   const image = await saveFileToCloudinary({
     path: req.file.path,
@@ -19,5 +24,6 @@ const createBook = async (req, res) => {
 };
 
 export default {
+  getAllBooks: ctrlWrapper(getAllBooks),
   createBook: ctrlWrapper(createBook),
 };
