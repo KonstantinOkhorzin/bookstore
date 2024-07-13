@@ -11,7 +11,7 @@ const deleteBookById = async (req, res) => {
 
   await deleteFileFromCloudinary(deletedBook.cloudinaryImagePath);
 
-  res.json(deletedBook);
+  res.status(204).send();
 };
 
 export default deleteBookById;
