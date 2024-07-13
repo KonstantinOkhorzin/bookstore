@@ -3,4 +3,3 @@ export { default as validatePasswordStrength } from './validatePasswordStrength.
 export { default as HttpError } from './HttpError.js';
 export { default as ctrlWrapper } from './ctrlWrapper.js';
 export { default as createJWToken } from './createJWToken.js';
-export { default as saveFileToCloudinary } from './saveFileToCloudinary.js';
