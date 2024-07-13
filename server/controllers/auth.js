@@ -1,6 +1,11 @@
 import bcrypt from 'bcryptjs';
 
-import { HttpError, ctrlWrapper, createJWToken, saveFileToCloudinary } from '../helpers/index.js';
+import { HttpError, ctrlWrapper, createJWToken } from '../helpers/index.js';
+import {
+  saveFileToCloudinary,
+  deleteFileFromCloudinary,
+  getFileNameFromPath,
+} from '../cloudinary/helpers/index.js';
 import User from '../models/user.js';
 
 const avatarConfig = {
@@ -10,6 +15,7 @@ const avatarConfig = {
 };
 
 const register = async (req, res) => {
+  const { DEFAULT_AVATAR } = process.env;
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
@@ -17,16 +23,29 @@ const register = async (req, res) => {
     throw HttpError(409, 'Email already in use');
   }
 
-  const avatarURL = req.file?.path
-    ? await saveFileToCloudinary({
-        path: req.file.path,
-        ...avatarConfig,
-      })
-    : process.env.DEFAULT_AVATAR;
+  let avatarURL;
+  let cloudinaryAvatarPath;
+
+  if (req.file?.path) {
+    const { url, cloudinaryFilePath } = await saveFileToCloudinary({
+      path: req.file.path,
+      ...avatarConfig,
+    });
+    avatarURL = url;
+    cloudinaryAvatarPath = cloudinaryFilePath;
+  } else {
+    avatarURL = DEFAULT_AVATAR;
+    cloudinaryAvatarPath = `${avatarConfig.folder}/${getFileNameFromPath(DEFAULT_AVATAR)}`;
+  }
 
   const hashPassword = await bcrypt.hash(password, 10);
 
-  const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL });
+  const newUser = await User.create({
+    ...req.body,
+    password: hashPassword,
+    avatarURL,
+    cloudinaryAvatarPath,
+  });
 
   const token = createJWToken(newUser);
 
@@ -93,11 +112,19 @@ const logout = async (req, res) => {
 };
 
 const updateAvatar = async (req, res) => {
-  const { _id } = req.user;
+  const { DEFAULT_AVATAR } = process.env;
+  const { _id, avatarURL: prevAvatarURL, cloudinaryAvatarPath } = req.user;
 
-  const avatarURL = await saveFileToCloudinary({ path: req.file.path, ...avatarConfig });
+  if (prevAvatarURL !== DEFAULT_AVATAR) {
+    await deleteFileFromCloudinary(cloudinaryAvatarPath);
+  }
 
-  await User.findByIdAndUpdate(_id, { avatarURL });
+  const { url: avatarURL, cloudinaryFilePath } = await saveFileToCloudinary({
+    path: req.file.path,
+    ...avatarConfig,
+  });
+
+  await User.findByIdAndUpdate(_id, { avatarURL, cloudinaryAvatarPath: cloudinaryFilePath });
 
   res.json({
     avatarURL,
