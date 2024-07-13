@@ -1,6 +1,6 @@
 import express from 'express';
 
-import booksController from '../controllers/books.js';
+import booksController from '../controllers/books/index.js';
 import { addBookSchema } from '../schemas/book.js';
 import {
   authenticate,
