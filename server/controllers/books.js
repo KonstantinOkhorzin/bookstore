@@ -1,4 +1,5 @@
-import { ctrlWrapper, saveFileToCloudinary } from '../helpers/index.js';
+import { ctrlWrapper } from '../helpers/index.js';
+import { saveFileToCloudinary, deleteFileFromCloudinary } from '../cloudinary/helpers/index.js';
 import Book from '../models/book.js';
 
 const bookImageConfig = {
@@ -8,40 +9,46 @@ const bookImageConfig = {
 };
 
 const getAllBooks = async (req, res) => {
-  const books = await Book.find();
+  const books = await Book.find({}, '-createdAt -updatedAt -cloudinaryImagePath');
   res.json(books);
 };
 
 const getBookById = async (req, res) => {
   const { id } = req.params;
 
-    const book = await Book.findById(id);
+  const book = await Book.findById(id);
 
-    if (!book) {
-      throw HttpError(404);
-    }
+  if (!book) {
+    throw HttpError(404);
+  }
 
-    res.json(book);
+  res.json(book);
 };
 
 const createBook = async (req, res) => {
-  const image = await saveFileToCloudinary({
+  const { url, cloudinaryFilePath } = await saveFileToCloudinary({
     path: req.file.path,
     ...bookImageConfig,
   });
 
-  const newBook = await Book.create({ ...req.body, image });
+  const newBook = await Book.create({
+    ...req.body,
+    image: url,
+    cloudinaryImagePath: cloudinaryFilePath,
+  });
 
   res.status(201).json(newBook);
 };
 
 const deleteBookById = async (req, res) => {
   const { id } = req.params;
-  const deletedBook = await Task.findByIdAndDelete(id);
+  const deletedBook = await Book.findByIdAndDelete(id);
 
   if (!deletedBook) {
     throw HttpError(404);
   }
+
+  await deleteFileFromCloudinary(deletedBook.cloudinaryImagePath);
 
   res.json(deletedBook);
 };

@@ -6,6 +6,7 @@ export const bookSchema = new Schema(
     author: { type: String, required: true },
     price: { type: Number, required: true },
     image: { type: String, required: true },
+    cloudinaryImagePath: { type: String, required: true },
     title: { type: String, required: true },
     level: { type: String, required: true },
     tags: { type: [String], required: true },
