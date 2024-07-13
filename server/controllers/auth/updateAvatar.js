@@ -1,6 +1,6 @@
 import { saveFileToCloudinary, deleteFileFromCloudinary } from '../../cloudinary/helpers/index.js';
 import User from '../../models/user.js';
-import avatarConfig from './avatarConfig.js';
+import { avatarConfig } from './config.js';
 
 const updateAvatar = async (req, res) => {
   const { DEFAULT_AVATAR } = process.env;

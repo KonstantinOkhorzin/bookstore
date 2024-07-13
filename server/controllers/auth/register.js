@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { HttpError, createJWToken } from '../../helpers/index.js';
 import { saveFileToCloudinary, getFileNameFromPath } from '../../cloudinary/helpers/index.js';
 import User from '../../models/user.js';
-import avatarConfig from './avatarConfig.js';
+import { avatarConfig } from './config.js';
 
 const register = async (req, res) => {
   const { DEFAULT_AVATAR } = process.env;
