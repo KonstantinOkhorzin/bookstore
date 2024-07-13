@@ -1,6 +1,6 @@
 import User from '../../models/user.js';
 
-const getCurrent = async (req, res) => {
+const getCurrentUser = async (req, res) => {
   const { email } = req.user;
 
   const user = await User.findOne({ email });
@@ -13,4 +13,4 @@ const getCurrent = async (req, res) => {
   });
 };
 
-export default getCurrent;
+export default getCurrentUser;
