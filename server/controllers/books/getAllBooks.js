@@ -2,10 +2,27 @@ import Book from '../../models/book.js';
 import { blackList } from './сonfig.js';
 
 const getAllBooks = async (req, res) => {
-  const { page = 1, limit = 8, bookTitle = '' } = req.query;
+  const { page = 1, limit = 8, bookTitle = '', priceRange = 'any' } = req.query;
   const parsedPage = Number(page);
   const parsedLimit = Number(limit);
   const searchQuery = bookTitle ? { title: new RegExp(bookTitle, 'i') } : {};
+
+  switch (priceRange) {
+    case 'up_to_15':
+      searchQuery.price = { $lte: 15 };
+      break;
+    case '15_to_30':
+      searchQuery.price = { $gte: 15, $lte: 30 };
+      break;
+    case '30_plus':
+      searchQuery.price = { $gte: 30 };
+      break;
+    case 'any':
+    default:
+      break;
+  }
+
+  console.log(searchQuery);
 
   const skip = (parsedPage - 1) * parsedLimit;
   const totalBooks = await Book.countDocuments(searchQuery);
