@@ -1,5 +1,6 @@
 import { deleteFileFromCloudinary } from '../../cloudinary/helpers/index.js';
 import Book from '../../models/book.js';
+import HttpError from '../../helpers/HttpError.js';
 
 const deleteBookById = async (req, res) => {
   const { id } = req.params;

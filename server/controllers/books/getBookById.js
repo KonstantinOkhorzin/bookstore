@@ -1,5 +1,6 @@
 import Book from '../../models/book.js';
 import { blackList } from './сonfig.js';
+import HttpError from '../../helpers/HttpError.js';
 
 const getBookById = async (req, res) => {
   const { id } = req.params;
