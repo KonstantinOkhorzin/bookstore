@@ -29,3 +29,11 @@ export interface IBooksResponse {
   prevPage: number | null;
   nextPage: number | null;
 }
+
+export interface IBooksParams {
+  page?: number;
+  limit?: number;
+  bookTitle?: string;
+  priceRange?: 'up_to_15' | '15_to_30' | '30_plus' | 'any';
+  sortBy?: 'price' | '-price';
+}
