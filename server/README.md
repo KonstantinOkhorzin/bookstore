@@ -219,8 +219,6 @@ This API provides endpoints for managing books and user authentication. It inclu
 - **Description:** Retrieve a list of all books with optional search, filter, and pagination.
 - **URL:** `/api/books`
 - **Method:** `GET`
-- **Headers:**
-  - `Authorization: Bearer <token>`
 - **Query Parameters:**
 
   - `page` (integer, optional, default: 1): The page number to retrieve.
@@ -290,8 +288,6 @@ This API provides endpoints for managing books and user authentication. It inclu
 - **Description:** Retrieve a single book by its unique identifier.
 - **URL:** `/api/books/:id`
 - **Method:** `GET`
-- **Headers:**
-  - `Authorization: Bearer <token>`
 - **URL Parameters:**
   - `id` (string, required): The unique identifier of the book.
 - **Success Response:**
