@@ -12,9 +12,9 @@ import {
 
 const router = express.Router();
 
-router.get('/', authenticate, booksController.getAllBooks);
+router.get('/', booksController.getAllBooks);
 
-router.get('/:id', authenticate, isValidId, booksController.getBookById);
+router.get('/:id', isValidId, booksController.getBookById);
 
 router.post(
   '/',
