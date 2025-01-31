@@ -10,19 +10,22 @@ export const ROUTES = {
   ADMIN_DASHBOARD: '/admin',
 };
 
+const USERS_ENDPOINT = 'users';
+const BOOKS_ENDPOINT = 'books';
+
 export const BOOKS_API_ENDPOINTS = {
   USERS: {
-    SIGN_UP: 'users/register',
-    SIGN_IN: 'users/login',
-    SIGN_OUT: 'users/logout',
-    CURRENT: 'users/current',
-    AVATARS: 'users/avatars',
+    SIGN_UP: `${USERS_ENDPOINT}/register`,
+    SIGN_IN: `${USERS_ENDPOINT}/login`,
+    SIGN_OUT: `${USERS_ENDPOINT}/logout`,
+    CURRENT: `${USERS_ENDPOINT}/current`,
+    AVATARS: `${USERS_ENDPOINT}/avatars`,
   },
   BOOKS: {
-    GET_ALL: 'books',
-    GET_BY_ID: (id: string) => `books/${id}`,
-    CREATE: '/api/books',
-    DELETE_BY_ID: (id: string) => `books/${id}`,
+    GET_ALL: BOOKS_ENDPOINT,
+    GET_BY_ID: (id: string) => `${BOOKS_ENDPOINT}/${id}`,
+    CREATE: BOOKS_ENDPOINT,
+    DELETE_BY_ID: (id: string) => `${BOOKS_ENDPOINT}/${id}`,
   },
 };
 
