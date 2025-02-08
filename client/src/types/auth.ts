@@ -13,10 +13,6 @@ export interface IUserAuthResponse extends IToken {
   user: IUser;
 }
 
-export interface IErrorResponse {
-  message: string;
-}
-
 export interface IAuthRequest {
   email: string;
   password: string;
