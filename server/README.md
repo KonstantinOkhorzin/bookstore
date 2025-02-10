@@ -22,7 +22,7 @@ This API provides endpoints for managing books and user authentication. It inclu
   - `avatar` (file, optional): The avatar image file for the user.
 - **Success Response:**
   - **Code:** 201 Created
-  - **Content:**
+    **Content:**
     ```json
     {
       "user": {
@@ -36,14 +36,14 @@ This API provides endpoints for managing books and user authentication. It inclu
     ```
 - **Error Responses:**
   - **Code:** 400 Bad Request
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "error message"
     }
     ```
   - **Code:** 409 Conflict
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "error message"
@@ -71,7 +71,7 @@ This API provides endpoints for managing books and user authentication. It inclu
   - `password` (string, required): The password for the user.
 - **Success Response:**
   - **Code:** 200 OK
-  - **Content:**
+    **Content:**
     ```json
     {
       "user": {
@@ -85,14 +85,14 @@ This API provides endpoints for managing books and user authentication. It inclu
     ```
 - **Error Responses:**
   - **Code:** 400 Bad Request
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "error message"
     }
     ```
   - **Code:** 401 Unauthorized
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "error message"
@@ -118,7 +118,7 @@ This API provides endpoints for managing books and user authentication. It inclu
   - `Authorization: Bearer <token>`
 - **Success Response:**
   - **Code:** 200 OK
-  - **Content:**
+    **Content:**
     ```json
     {
       "email": "string",
@@ -129,7 +129,7 @@ This API provides endpoints for managing books and user authentication. It inclu
     ```
 - **Error Response:**
   - **Code:** 401 Unauthorized
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "error message"
@@ -151,11 +151,11 @@ This API provides endpoints for managing books and user authentication. It inclu
   - `Authorization: Bearer <token>`
 - **Success Response:**
   - **Code:** 204 No Content
-  - **Content:** No content
+    **Content:** No content
 
 - **Error Response:**
   - **Code:** 401 Unauthorized
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "error message"
@@ -181,7 +181,7 @@ This API provides endpoints for managing books and user authentication. It inclu
 
 - **Success Response:**
   - **Code:** 200 OK
-  - **Content:**
+    **Content:**
     ```json
     {
       "avatarURL": "string"
@@ -190,14 +190,14 @@ This API provides endpoints for managing books and user authentication. It inclu
 
 - **Error Responses:**
   - **Code:** 400 Bad Request
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "string"
     }
     ```
   - **Code:** 401 Unauthorized
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "string"
@@ -236,7 +236,7 @@ This API provides endpoints for managing books and user authentication. It inclu
 - **Success Response:**
 
   - **Code:** 200 OK
-  - **Content:**
+    **Content:**
     ```json
     {
       "books": [
@@ -267,16 +267,6 @@ This API provides endpoints for managing books and user authentication. It inclu
     }
     ```
 
-- **Error Response:**
-
-  - **Code:** 401 Unauthorized
-  - **Content:**
-    ```json
-    {
-      "message": "error message"
-    }
-    ```
-
 - **Example Request:**
 
   ```
@@ -292,7 +282,7 @@ This API provides endpoints for managing books and user authentication. It inclu
   - `id` (string, required): The unique identifier of the book.
 - **Success Response:**
   - **Code:** 200 OK
-  - **Content:**
+    **Content:**
     ```json
     {
       "_id": "string",
@@ -310,21 +300,14 @@ This API provides endpoints for managing books and user authentication. It inclu
 - **Error Responses:**
 
   - **Code:** 400 Bad Request
-  - **Content:**
-    ```json
-    {
-      "message": "error message"
-    }
-    ```
-  - **Code:** 401 Unauthorized
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "error message"
     }
     ```
   - **Code:** 404 Not Found
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "error message"
@@ -358,7 +341,7 @@ This API provides endpoints for managing books and user authentication. It inclu
 - **Success Response:**
 
   - **Code:** 201 Created
-  - **Content:**
+    **Content:**
     ```json
     {
       "_id": "string",
@@ -380,21 +363,21 @@ This API provides endpoints for managing books and user authentication. It inclu
 - **Error Responses:**
 
   - **Code:** 400 Bad Request
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "string"
     }
     ```
   - **Code:** 401 Unauthorized
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "string"
     }
     ```
   - **Code:** 403 Forbidden
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "string"
@@ -429,31 +412,31 @@ This API provides endpoints for managing books and user authentication. It inclu
   - `id` (string, required): The unique identifier of the book.
 - **Success Response:**
   - **Code:** 204 No Content
-  - **Content:** No content
+    **Content:** No content
 - **Error Responses:**
   - **Code:** 400 Bad Request
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "string"
     }
     ```
   - **Code:** 401 Unauthorized
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "string"
     }
     ```
   - **Code:** 403 Forbidden
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "string"
     }
     ```
   - **Code:** 404 Not Found
-  - **Content:**
+    **Content:**
     ```json
     {
       "message": "string"
