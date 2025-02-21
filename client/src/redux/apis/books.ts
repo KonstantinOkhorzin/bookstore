@@ -21,10 +21,7 @@ const booksAPI = createApi({
       query: params => ({ url: GET_ALL, method: GET, params }),
       providesTags: result =>
         result
-          ? [
-              ...result.books.map(({ _id: id }) => ({ type: 'Books' as const, id })),
-              { type: BOOKS, id: LIST },
-            ]
+          ? [...result.books.map(({ _id: id }) => ({ type: BOOKS, id })), { type: BOOKS, id: LIST }]
           : [{ type: BOOKS, id: LIST }],
     }),
     getBookById: builder.query<IBook, string>({
