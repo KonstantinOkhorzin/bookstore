@@ -1,3 +1,8 @@
+export const DEFAULTS = {
+  BOOKS_LIMIT: 6,
+  INITIAL_PAGE: 1,
+} as const;
+
 export const ROUTES = {
   HOME: '/',
   SIGN_IN: 'sign-in',
@@ -35,12 +40,32 @@ export const HTTP_METHODS = {
   DELETE: 'DELETE',
   PUT: 'PUT',
   PATCH: 'PATCH',
-};
+} as const;
 
 export const TAG_TYPES = {
   BOOKS: 'Books',
-};
+} as const;
 
 export const TAG_IDS = {
   LIST: 'LIST',
-};
+} as const;
+
+export const QUERY_PARAMS = {
+  BOOK_TITLE: 'bookTitle',
+  SORT_BY: 'sortBy',
+  PRICE_RANGE: 'priceRange',
+  PAGE: 'page',
+} as const;
+
+export const SORT_OPTIONS = {
+  POPULARITY: '',
+  PRICE_ASC: 'price',
+  PRICE_DESC: '-price',
+} as const;
+
+export const PRICE_FILTERS = {
+  ANY: 'any',
+  UP_TO_15: 'up_to_15',
+  FROM_15_TO_30: '15_to_30',
+  ABOVE_30: '30_plus',
+} as const;
