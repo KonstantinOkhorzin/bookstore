@@ -1,3 +1,5 @@
+import { SORT_OPTIONS, PRICE_FILTERS, QUERY_PARAMS } from '../constants';
+
 interface IBaseBook {
   title: string;
   author: string;
@@ -30,10 +32,14 @@ export interface IBooksResponse {
   nextPage: number | null;
 }
 
+export type SortByType = (typeof SORT_OPTIONS)[keyof typeof SORT_OPTIONS];
+export type PriceRangeType = (typeof PRICE_FILTERS)[keyof typeof PRICE_FILTERS];
+export type QueryParamsType = (typeof QUERY_PARAMS)[keyof typeof QUERY_PARAMS];
+
 export interface IBooksParams {
   page?: number;
   limit?: number;
   bookTitle?: string;
-  priceRange?: 'up_to_15' | '15_to_30' | '30_plus' | 'any';
-  sortBy?: 'price' | '-price';
+  priceRange?: PriceRangeType;
+  sortBy?: SortByType;
 }
