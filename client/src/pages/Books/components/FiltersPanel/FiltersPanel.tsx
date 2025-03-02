@@ -1,17 +1,10 @@
-import {
-  Box,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
-} from '@mui/material';
+import { Box, TextField, SelectChangeEvent } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { DEFAULTS, QUERY_PARAMS, SORT_OPTIONS, PRICE_FILTERS } from '../../../../constants';
 import { QueryParamsType } from '../../../../types/books';
+import OptionSelect from './components/OptionSelect';
 
 const FiltersPanel = () => {
   const { BOOK_TITLE, SORT_BY, PRICE_RANGE, PAGE } = QUERY_PARAMS;
@@ -60,32 +53,21 @@ const FiltersPanel = () => {
         sx={{ minWidth: 210 }}
       />
 
-      <FormControl sx={{ minWidth: 200 }}>
-        <InputLabel id={SORT_BY}>Sort by</InputLabel>
-        <Select labelId={SORT_BY} value={sortBy} label='Sort by' onChange={onSortChange}>
-          {SORT_OPTIONS.map(({ value, label }) => (
-            <MenuItem key={value} value={value}>
-              {label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <OptionSelect
+        id={SORT_BY}
+        label='Sort by'
+        value={sortBy}
+        onChange={onSortChange}
+        options={SORT_OPTIONS}
+      />
 
-      <FormControl sx={{ minWidth: 200 }}>
-        <InputLabel id={PRICE_RANGE}>Filter by</InputLabel>
-        <Select
-          labelId={PRICE_RANGE}
-          value={priceRange}
-          label='Filter by'
-          onChange={onFilterChange}
-        >
-          {PRICE_FILTERS.map(({ value, label }) => (
-            <MenuItem key={value} value={value}>
-              {label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <OptionSelect
+        id={PRICE_RANGE}
+        label='Filter by'
+        value={priceRange}
+        onChange={onFilterChange}
+        options={PRICE_FILTERS}
+      />
     </Box>
   );
 };
