@@ -32,8 +32,8 @@ export interface IBooksResponse {
   nextPage: number | null;
 }
 
-export type SortByType = (typeof SORT_OPTIONS)[keyof typeof SORT_OPTIONS];
-export type PriceRangeType = (typeof PRICE_FILTERS)[keyof typeof PRICE_FILTERS];
+export type SortByType = (typeof SORT_OPTIONS)[number]['value'];
+export type PriceRangeType = (typeof PRICE_FILTERS)[number]['value'];
 export type QueryParamsType = (typeof QUERY_PARAMS)[keyof typeof QUERY_PARAMS];
 
 export interface IBooksParams {

@@ -57,15 +57,15 @@ export const QUERY_PARAMS = {
   PAGE: 'page',
 } as const;
 
-export const SORT_OPTIONS = {
-  POPULARITY: '',
-  PRICE_ASC: 'price',
-  PRICE_DESC: '-price',
-} as const;
+export const SORT_OPTIONS = [
+  { value: '', label: 'popularity' },
+  { value: 'price', label: 'price in ascending order' },
+  { value: '-price', label: 'price in descending order' },
+] as const;
 
-export const PRICE_FILTERS = {
-  ANY: 'any',
-  UP_TO_15: 'up_to_15',
-  FROM_15_TO_30: '15_to_30',
-  ABOVE_30: '30_plus',
-} as const;
+export const PRICE_FILTERS = [
+  { value: 'any', label: 'any price' },
+  { value: 'up_to_15', label: 'price up to $15' },
+  { value: '15_to_30', label: 'price between $15 and $30' },
+  { value: '30_plus', label: 'price above $30' },
+] as const;

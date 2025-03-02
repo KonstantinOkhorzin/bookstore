@@ -15,8 +15,6 @@ import { QueryParamsType } from '../../../../types/books';
 
 const FiltersPanel = () => {
   const { BOOK_TITLE, SORT_BY, PRICE_RANGE, PAGE } = QUERY_PARAMS;
-  const { POPULARITY, PRICE_ASC, PRICE_DESC } = SORT_OPTIONS;
-  const { ANY, UP_TO_15, FROM_15_TO_30, ABOVE_30 } = PRICE_FILTERS;
   const [searchParams, setSearchParams] = useSearchParams();
   const bookTitle = searchParams.get(BOOK_TITLE) ?? '';
   const sortBy = searchParams.get(SORT_BY) ?? '';
@@ -65,9 +63,11 @@ const FiltersPanel = () => {
       <FormControl sx={{ minWidth: 200 }}>
         <InputLabel id={SORT_BY}>Sort by</InputLabel>
         <Select labelId={SORT_BY} value={sortBy} label='Sort by' onChange={onSortChange}>
-          <MenuItem value={POPULARITY}>popularity</MenuItem>
-          <MenuItem value={PRICE_ASC}>price in ascending order</MenuItem>
-          <MenuItem value={PRICE_DESC}>price in descending order</MenuItem>
+          {SORT_OPTIONS.map(({ value, label }) => (
+            <MenuItem key={value} value={value}>
+              {label}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 
@@ -79,10 +79,11 @@ const FiltersPanel = () => {
           label='Filter by'
           onChange={onFilterChange}
         >
-          <MenuItem value={ANY}>any price</MenuItem>
-          <MenuItem value={UP_TO_15}>price up to $15</MenuItem>
-          <MenuItem value={FROM_15_TO_30}>price between $15 and $30</MenuItem>
-          <MenuItem value={ABOVE_30}>price above $30</MenuItem>
+          {PRICE_FILTERS.map(({ value, label }) => (
+            <MenuItem key={value} value={value}>
+              {label}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Box>
