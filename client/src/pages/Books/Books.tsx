@@ -1,15 +1,15 @@
 import { ChangeEvent, useMemo } from 'react';
-import { Pagination, Box, CircularProgress, Typography } from '@mui/material';
+import { Pagination, Box, Typography } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import { useGetBooksQuery } from '../../redux/apis/books';
-import { handleError } from '../../helpers';
 import { DEFAULTS, QUERY_PARAMS } from '../../constants';
 import { FiltersPanel, BookList } from './components';
+import { ErrorMessage, Spinner } from '../../components';
 
 const Books = () => {
   const { BOOKS_LIMIT, INITIAL_PAGE } = DEFAULTS;
-  const {PAGE} = QUERY_PARAMS;
+  const { PAGE } = QUERY_PARAMS;
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = Number(searchParams.get(PAGE) ?? INITIAL_PAGE);
   const params = useMemo(() => Object.fromEntries([...searchParams]), [searchParams]);
@@ -30,13 +30,9 @@ const Books = () => {
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       {isSuccess && <FiltersPanel />}
 
-      {isFetching && <CircularProgress sx={{ margin: '0 auto', display: 'block' }} />}
+      {isFetching && <Spinner />}
 
-      {error && (
-        <Typography variant='h3' component='p' m='0 auto' textAlign='center' color='error'>
-          {handleError(error)}
-        </Typography>
-      )}
+      {error && <ErrorMessage error={error} />}
 
       {data && !isFetching && (
         <>
