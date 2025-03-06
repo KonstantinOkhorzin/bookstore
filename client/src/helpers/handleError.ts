@@ -1,7 +1,6 @@
-import { SerializedError } from '@reduxjs/toolkit';
-import type { IAxiosBaseQueryError } from '../types';
+import type { IError } from '../types';
 
-const handleError = (error: IAxiosBaseQueryError | SerializedError): string => {
+const handleError = (error: IError): string => {
   if ('status' in error) {
     return typeof error.data === 'string' ? error.data : 'Unknown server error';
   }
