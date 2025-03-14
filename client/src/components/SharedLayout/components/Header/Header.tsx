@@ -5,12 +5,13 @@ import { AppBar, Box, Toolbar, IconButton, Badge, Avatar, Tooltip } from '@mui/m
 
 import { ROUTES } from '../../../../constants';
 import { UserMenu, Logo } from './components';
+import { useAuth } from '../../../../hooks';
 
 const { FAVORITES, CART, SIGN_IN } = ROUTES;
 
 function Header() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const isLoggedIn = true;
+  const { isLoggedIn } = useAuth();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
