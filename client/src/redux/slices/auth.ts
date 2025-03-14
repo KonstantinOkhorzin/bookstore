@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUser } from '../../types/auth';
+import { USER_ROLES } from '../../constants';
 
 interface InitialState {
   user: IUser | null;
@@ -24,10 +25,11 @@ const slice = createSlice({
   selectors: {
     selectUser: state => state.user,
     selectIsLoggedIn: state => Boolean(state.user),
+    selectIsAdmin: state => state.user?.role === USER_ROLES.ADMIN,
   },
 });
 
 export const { setUserData, clearUserData } = slice.actions;
-export const { selectIsLoggedIn } = slice.selectors;
+export const { selectIsLoggedIn, selectIsAdmin, selectUser } = slice.selectors;
 
 export default slice.reducer;
