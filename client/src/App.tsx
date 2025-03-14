@@ -1,11 +1,9 @@
-import { lazy, useEffect } from 'react';
+import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import SharedLayout from './components/SharedLayout';
 import { ROUTES } from './constants';
-import { useRefreshUserQuery } from './redux/apis/auth';
-import { setUserData } from './redux/slices/auth';
-import { useAppDispatch } from './hooks';
+import { useAuthCheck } from './hooks';
 import { Spinner } from './components';
 
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
@@ -57,18 +55,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const dispatch = useAppDispatch();
-  const hasToken = Boolean(window.localStorage.getItem('token'));
-
-  const { data, isLoading } = useRefreshUserQuery(undefined, {
-    skip: !hasToken,
-  });
-
-  useEffect(() => {
-    if (data) {
-      dispatch(setUserData(data));
-    }
-  }, [data, dispatch]);
+  const isLoading = useAuthCheck();
 
   return isLoading ? <Spinner /> : <RouterProvider router={router} />;
 }
