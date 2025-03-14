@@ -48,7 +48,7 @@ const DetailsBook: FC<IProps> = ({ book }) => {
             {amount > 0 ? 'In Stock' : 'Out of Stock'}
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', color: 'primary.main' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end'}}>
           <Button component={Link} to={backLinkLocation} variant='text' startIcon={<ArrowBack />}>
             Back to books
           </Button>
