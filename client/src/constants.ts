@@ -69,3 +69,8 @@ export const PRICE_FILTERS = [
   { value: '15_to_30', label: 'price between $15 and $30' },
   { value: '30_plus', label: 'price above $30' },
 ] as const;
+
+export const USER_ROLES = {
+  USER: 'user',
+  ADMIN: 'admin',
+} as const;
