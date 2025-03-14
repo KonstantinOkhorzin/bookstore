@@ -1,12 +1,28 @@
 import { Menu, MenuItem, Typography } from '@mui/material';
 import { FC } from 'react';
 
+import { useAppDispatch } from '../../../../../../hooks';
+import { useSignOutMutation } from '../../../../../../redux/apis/auth';
+import { clearUserData } from '../../../../../../redux/slices/auth';
+
 interface IProps {
   anchorElUser: HTMLElement | null;
   closeUserMenu: () => void;
 }
 
 const UserMenu: FC<IProps> = ({ anchorElUser, closeUserMenu }) => {
+  const dispatch = useAppDispatch();
+  const [logOut] = useSignOutMutation();
+
+  const onSignOutClick = () => {
+    logOut()
+      .unwrap()
+      .then(() => {
+        dispatch(clearUserData());
+        window.localStorage.removeItem('token');
+      });
+  };
+
   return (
     <Menu
       sx={{ mt: '45px' }}
@@ -24,7 +40,7 @@ const UserMenu: FC<IProps> = ({ anchorElUser, closeUserMenu }) => {
       open={Boolean(anchorElUser)}
       onClose={closeUserMenu}
     >
-      <MenuItem onClick={closeUserMenu}>
+      <MenuItem onClick={onSignOutClick}>
         <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
       </MenuItem>
     </Menu>
