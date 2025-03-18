@@ -7,19 +7,23 @@ import {
   InputLabel,
   OutlinedInput,
 } from '@mui/material';
-import { FC, HTMLInputTypeAttribute, MouseEvent, useId, useState } from 'react';
+import { FC, MouseEvent, useId, useState } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
+
+import PasswordStrengthIndicator from './components/PasswordStrengthIndicator';
 
 interface IProps {
   label: string;
-  type?: HTMLInputTypeAttribute;
+  type?: 'text' | 'password' | 'email';
   errorMessage?: string;
   register: UseFormRegisterReturn;
+  passwordValue?: string;
 }
 
-const FormField: FC<IProps> = ({ errorMessage, label, type = 'text', register }) => {
+const FormField: FC<IProps> = ({ errorMessage, label, type = 'text', register, passwordValue }) => {
   const id = useId();
   const [showPassword, setShowPassword] = useState(false);
+  const isPasswordType = type === 'password';
 
   const handleClickShowPassword = () => setShowPassword(show => !show);
 
@@ -38,9 +42,9 @@ const FormField: FC<IProps> = ({ errorMessage, label, type = 'text', register })
         {...register}
         id={id}
         label={label}
-        type={type === 'password' && showPassword ? 'text' : type}
+        type={isPasswordType && showPassword ? 'text' : type}
         endAdornment={
-          type === 'password' ? (
+          isPasswordType ? (
             <InputAdornment position='end'>
               <IconButton
                 color={errorMessage ? 'error' : 'default'}
@@ -56,6 +60,9 @@ const FormField: FC<IProps> = ({ errorMessage, label, type = 'text', register })
           ) : null
         }
       />
+      {passwordValue && isPasswordType && (
+        <PasswordStrengthIndicator passwordValue={passwordValue} />
+      )}
       {errorMessage && <FormHelperText error>{errorMessage}</FormHelperText>}
     </FormControl>
   );
