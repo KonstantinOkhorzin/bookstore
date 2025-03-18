@@ -20,6 +20,7 @@ This API provides endpoints for managing books and user authentication. It inclu
   - `email` (string, required): The email of the user.
   - `password` (string, required): The password for the user.
   - `avatar` (file, optional): The avatar image file for the user.
+  - `licenseAccepted` (boolean, required): Whether the user has accepted the terms of service.
 - **Success Response:**
   - **Code:** 201 Created
     **Content:**
