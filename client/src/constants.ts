@@ -74,3 +74,7 @@ export const USER_ROLES = {
   USER: 'user',
   ADMIN: 'admin',
 } as const;
+
+export const ACCEPTED_IMAGE_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+
+export const MAX_FILE_SIZE = 1 * 1024 * 1024;

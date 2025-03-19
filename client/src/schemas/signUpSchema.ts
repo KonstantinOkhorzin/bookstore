@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { validatePasswordStrength } from '../helpers';
+import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from '../constants';
 
 const signUpSchema = z
   .object({
@@ -14,6 +15,15 @@ const signUpSchema = z
         password => ({ message: validatePasswordStrength(password).message })
       ),
     confirmPassword: z.string().optional(),
+    avatar: z
+      .instanceof(File)
+      .optional()
+      .refine(file => !file || ACCEPTED_IMAGE_TYPES.includes(file.type), {
+        message: 'Avatar must be in PNG, JPEG, JPG, or WEBP format',
+      })
+      .refine(file => !file || file.size <= MAX_FILE_SIZE, {
+        message: 'Avatar size must be less than 1MB',
+      }),
     licenseAccepted: z.boolean().refine(value => value === true, {
       message: 'You must accept the license',
     }),
