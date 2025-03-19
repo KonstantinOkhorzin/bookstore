@@ -21,6 +21,7 @@ export interface IAuthRequest {
 export interface IRegisterRequest extends IAuthRequest {
   name: string;
   avatar?: File;
+  licenseAccepted: boolean;
 }
 
 export interface IUpdateAvatarRequest {
