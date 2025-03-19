@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../../../hooks';
 import { useSignUpMutation } from '../../../../redux/apis/auth';
 import { setUserData } from '../../../../redux/slices/auth';
 import { handleError } from '../../../../helpers';
+import FileUploader from './components/FileUploader';
 
 type FormValues = z.infer<typeof signUpSchema>;
 
@@ -17,6 +18,7 @@ const defaultValues: FormValues = {
   email: '',
   password: '',
   confirmPassword: '',
+  avatar: undefined,
   licenseAccepted: false,
 };
 
@@ -81,6 +83,14 @@ const SignUpForm = () => {
         errorMessage={errors.confirmPassword?.message}
       />
 
+      <Controller
+        control={control}
+        name='avatar'
+        render={({ field }) => (
+          <FileUploader onFileChange={field.onChange} errorMessage={errors.avatar?.message} />
+        )}
+      />
+
       <Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Controller
@@ -117,5 +127,3 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
-
-// avatar: undefined,
