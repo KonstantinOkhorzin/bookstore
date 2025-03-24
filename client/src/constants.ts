@@ -1,16 +1,18 @@
 export const DEFAULTS = {
   BOOKS_LIMIT: 6,
   INITIAL_PAGE: 1,
+  AVATAR:
+    'https://res.cloudinary.com/dak1c6osm/image/upload/v1720188723/avatars/default_avatar.png',
 } as const;
 
 export const ROUTES = {
   HOME: '/',
-  SIGN_IN: 'sign-in',
-  SIGN_UP: 'sign-up',
-  BOOKS: 'books',
-  SINGLE_BOOK: 'books/:id',
-  FAVORITES: 'favorites',
-  CART: 'cart',
+  SIGN_IN: '/sign-in',
+  SIGN_UP: '/sign-up',
+  BOOKS: '/books',
+  SINGLE_BOOK: '/books/:id',
+  FAVORITES: '/favorites',
+  CART: '/cart',
   NOT_FOUND: '*',
   ADMIN_DASHBOARD: '/admin',
 };
