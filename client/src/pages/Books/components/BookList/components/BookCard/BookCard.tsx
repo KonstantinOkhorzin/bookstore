@@ -3,20 +3,20 @@ import { Card, CardContent, CardMedia, Typography, CardActionArea } from '@mui/m
 import { Link, useLocation } from 'react-router-dom';
 
 import { IBook } from '../../../../../../types/books';
-import { BOOKS_API_ENDPOINTS } from '../../../../../../constants';
+import { ROUTES } from '../../../../../../constants';
 
 interface IProps {
   book: IBook;
 }
 
 const BookCard: FC<IProps> = ({ book }) => {
-  const location = useLocation(); 
+  const location = useLocation();
 
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea
         component={Link}
-        to={BOOKS_API_ENDPOINTS.BOOKS.GET_BY_ID(book._id)}
+        to={`${ROUTES.BOOKS}/${book._id}`}
         state={{ from: location }}
       >
         <CardMedia component='img' height='140' image={book.image} alt={book.title} />

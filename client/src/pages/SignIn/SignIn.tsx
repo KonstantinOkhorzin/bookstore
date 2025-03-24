@@ -27,7 +27,7 @@ const SignIn = () => {
         Don`t have an account?{' '}
         <Typography
           component={Link}
-          to={`/${ROUTES.SIGN_UP}`}
+          to={ROUTES.SIGN_UP}
           sx={{
             color: 'primary.main',
             '&:hover': { textDecoration: 'underline' },
