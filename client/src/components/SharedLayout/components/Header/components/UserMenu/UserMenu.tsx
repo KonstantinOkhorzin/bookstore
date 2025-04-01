@@ -1,9 +1,11 @@
 import { Menu, MenuItem, Typography } from '@mui/material';
 import { FC } from 'react';
 
-import { useAppDispatch } from '../../../../../../hooks';
+import { useAppDispatch, useAuth } from '../../../../../../hooks';
 import { useSignOutMutation } from '../../../../../../redux/apis/auth';
 import { clearUserData } from '../../../../../../redux/slices/auth';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../../../../../../constants';
 
 interface IProps {
   anchorElUser: HTMLElement | null;
@@ -13,6 +15,7 @@ interface IProps {
 const UserMenu: FC<IProps> = ({ anchorElUser, closeUserMenu }) => {
   const dispatch = useAppDispatch();
   const [logOut] = useSignOutMutation();
+  const { isAdmin } = useAuth();
 
   const onSignOutClick = () => {
     logOut()
@@ -40,6 +43,19 @@ const UserMenu: FC<IProps> = ({ anchorElUser, closeUserMenu }) => {
       open={Boolean(anchorElUser)}
       onClose={closeUserMenu}
     >
+      {isAdmin && (
+        <MenuItem>
+          <Typography
+            onClick={closeUserMenu}
+            component={Link}
+            to={ROUTES.ADMIN_DASHBOARD}
+            sx={{ textAlign: 'center', color: 'currentcolor' }}
+          >
+            Admin Dashboard
+          </Typography>
+        </MenuItem>
+      )}
+
       <MenuItem onClick={onSignOutClick}>
         <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
       </MenuItem>
