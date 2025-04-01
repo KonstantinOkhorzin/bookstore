@@ -4,13 +4,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SharedLayout from './components/SharedLayout';
 import { ROUTES } from './constants';
 import { useAuthCheck } from './hooks';
-import { Spinner } from './components';
+import { AdminRoute, PrivateRoute, RestrictedRoute, Spinner } from './components';
+import NotFound from './pages/NotFound';
 
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const Books = lazy(() => import('./pages/Books'));
 const Cart = lazy(() => import('./pages/Cart'));
 const Favorites = lazy(() => import('./pages/Favorites'));
-const NotFound = lazy(() => import('./pages/NotFound'));
 const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const SingleBook = lazy(() => import('./pages/SingleBook'));
@@ -26,38 +26,42 @@ const router = createBrowserRouter([
       },
       {
         path: ROUTES.CART,
-        element: <Cart />,
+        element: <PrivateRoute component={Cart} redirectTo={ROUTES.SIGN_IN} />,
       },
       {
         path: ROUTES.FAVORITES,
-        element: <Favorites />,
+        element: <PrivateRoute component={Favorites} redirectTo={ROUTES.SIGN_IN} />,
       },
       {
         path: ROUTES.SIGN_IN,
-        element: <SignIn />,
+        element: <RestrictedRoute component={SignIn} />,
       },
       {
         path: ROUTES.SIGN_UP,
-        element: <SignUp />,
+        element: <RestrictedRoute component={SignUp} />,
       },
       {
         path: ROUTES.SINGLE_BOOK,
         element: <SingleBook />,
       },
+      {
+        path: ROUTES.ADMIN_DASHBOARD,
+        element: <AdminRoute component={AdminDashboard} redirectTo={ROUTES.SIGN_IN} />,
+        children: [],
+      },
+      {
+        path: ROUTES.NOT_FOUND,
+        element: <NotFound />,
+      },
     ],
     errorElement: <NotFound />,
-  },
-  {
-    path: ROUTES.ADMIN_DASHBOARD,
-    element: <AdminDashboard />,
-    children: [],
   },
 ]);
 
 function App() {
-  const isLoading = useAuthCheck();
+  const { isRefreshing } = useAuthCheck();
 
-  return isLoading ? <Spinner /> : <RouterProvider router={router} />;
+  return isRefreshing ? <Spinner /> : <RouterProvider router={router} />;
 }
 
 export default App;

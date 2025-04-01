@@ -15,7 +15,7 @@ const useAuthCheck = () => {
     if (data) dispatch(setUserData(data));
   }, [data, dispatch]);
 
-  return isLoading;
+  return { isRefreshing: isLoading };
 };
 
 export default useAuthCheck;
