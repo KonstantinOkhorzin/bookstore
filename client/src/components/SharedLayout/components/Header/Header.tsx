@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShoppingBag, Favorite, AccountCircle } from '@mui/icons-material';
 import { AppBar, Box, Toolbar, IconButton, Badge, Avatar, Tooltip } from '@mui/material';
 
-import { ROUTES } from '../../../../constants';
+import { DEFAULTS, ROUTES } from '../../../../constants';
 import { UserMenu, Logo } from './components';
 import { useAuth } from '../../../../hooks';
 
@@ -11,7 +11,7 @@ const { FAVORITES, CART, SIGN_IN } = ROUTES;
 
 function Header() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -54,7 +54,7 @@ function Header() {
               <Box sx={{ ml: '.5rem' }}>
                 <Tooltip title='Open settings'>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt='' src='' />
+                    <Avatar alt='user avatar' src={user?.avatarURL ? user.avatarURL : DEFAULTS.AVATAR} />
                   </IconButton>
                 </Tooltip>
               </Box>
