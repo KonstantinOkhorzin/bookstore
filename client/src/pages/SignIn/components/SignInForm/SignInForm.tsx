@@ -60,7 +60,7 @@ const SignInForm = () => {
       />
 
       <Button type='submit' variant='contained' disabled={isLoading}>
-        submit
+        {isLoading ? 'Submitting...' : 'Submit'}
       </Button>
 
       {errors.root && (
