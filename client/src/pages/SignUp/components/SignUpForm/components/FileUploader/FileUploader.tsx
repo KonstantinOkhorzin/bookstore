@@ -1,12 +1,12 @@
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { Box, FormHelperText } from '@mui/material';
+import { Box } from '@mui/material';
 
 interface IProps {
-  onFileChange: (file: File | null) => void;
-  errorMessage?: string;
+  fileUpload: (file: File | null) => void;
+  setPreviewFile: (value: React.SetStateAction<string | null>) => void;
 }
 
 const VisuallyHiddenInput = styled('input')({
@@ -21,25 +21,21 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const FileUploader: FC<IProps> = ({ onFileChange, errorMessage }) => {
+const FileUploader: FC<IProps> = ({ fileUpload, setPreviewFile }) => {
+  const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] ?? null;
+    if (file) {
+      fileUpload(file);
+      setPreviewFile(URL.createObjectURL(file));
+    }
+  };
+
   return (
     <Box>
       <Button component='label' variant='contained' tabIndex={-1} startIcon={<CloudUploadIcon />}>
-        Upload files
-        <VisuallyHiddenInput
-          type='file'
-          accept='image/*'
-          onChange={event => {
-            const file = event.target.files?.[0] ?? null;
-            onFileChange(file);
-          }}
-        />
+        Upload avatar
+        <VisuallyHiddenInput type='file' accept='image/*' onChange={onFileChange} />
       </Button>
-      {errorMessage && (
-        <FormHelperText sx={{ pl: '14px' }} error>
-          {errorMessage}
-        </FormHelperText>
-      )}
     </Box>
   );
 };
