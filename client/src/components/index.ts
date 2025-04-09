@@ -5,3 +5,4 @@ export { default as FormField } from './FormField';
 export { default as RestrictedRoute } from './RestrictedRoute';
 export { default as PrivateRoute } from './PrivateRoute';
 export { default as AdminRoute } from './AdminRoute';
+export { default as FormWrapper } from './FormWrapper';
