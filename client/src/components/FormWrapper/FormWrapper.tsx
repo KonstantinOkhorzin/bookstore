@@ -18,9 +18,9 @@ const FormWrapper: FC<IProps> = ({ children, title, actionMessage, linkText, lin
         display: 'flex',
         flexDirection: 'column',
         gap: 2,
-        maxWidth: '400px',
+        maxWidth: { sm: '400px' },
         p: 3,
-        m: '0 auto',
+        m: { xs: '0 -16px', sm: '0 auto' },
       }}
     >
       <Typography variant='h5' component='h1' textAlign='center'>
