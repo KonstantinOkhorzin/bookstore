@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: ROUTES.ADMIN_DASHBOARD,
-        element: <AdminRoute component={AdminDashboard} redirectTo={ROUTES.SIGN_IN} />,
+        element: <AdminRoute component={AdminDashboard} />,
         children: [],
       },
       {
