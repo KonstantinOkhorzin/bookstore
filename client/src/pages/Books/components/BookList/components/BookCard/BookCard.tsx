@@ -13,7 +13,7 @@ const BookCard: FC<IProps> = ({ book }) => {
   const location = useLocation();
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardActionArea
         component={Link}
         to={`${ROUTES.BOOKS}/${book._id}`}

@@ -1,6 +1,7 @@
 import { FC } from 'react';
+import { List, ListItem } from '@mui/material';
+
 import BookCard from './components/BookCard';
-import { Grid2 } from '@mui/material';
 import { IBook } from '../../../../types/books';
 
 interface IProps {
@@ -9,13 +10,23 @@ interface IProps {
 
 const BookList: FC<IProps> = ({ bookList }) => {
   return (
-    <Grid2 container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 4, md: 6 }} component='ul'>
+    <List
+      disablePadding
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: {
+          xs: 'repeat(auto-fit, minmax(220px, 1fr))',
+          sm: 'repeat(auto-fit, minmax(250px, 1fr))',
+        },
+        gap: { xs: 2, sm: 3 },
+      }}
+    >
       {bookList.map(book => (
-        <Grid2 key={book._id} size={2} component='li'>
+        <ListItem key={book._id} disablePadding>
           <BookCard book={book} />
-        </Grid2>
+        </ListItem>
       ))}
-    </Grid2>
+    </List>
   );
 };
 
